@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Go Fish</title>
+    @using System.Collections.Generic;
+    @using System;
+  </head>
+  <body>
+
+    @{
+        List<string> suits = new List<string>(){"clubs", "diamonds", "hearts", "spades"};
+        List<string> ranks = new List<string>(){"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
+        List<string> deck = new List<string>(){};
+        for(int i=0; i<=suits.Count-1; i++)
+        {
+          for(int j=0; j<=ranks.Count-1; j++)
+          {
+            deck.Add(ranks[j]+" of "+suits[i]);
+          }
+        }
+      }
+    <h1>The Deck</h1>
+    <ul>
+      @foreach(int card in Model.GetCards())
+      {
+        <li>@deck[card-1]</li>
+      }
+    </ul>
+    <h3>Player 1's Cards</h3>
+    <ul>
+      @foreach(int card in Model.GetPlayers()[0].GetHand())
+      {
+        <li>@deck[card-1]</li>
+      }
+    </ul>
+    <h3>Player 2's Cards</h3>
+    <ul>
+      @foreach(int card in Model.GetPlayers()[1].GetHand())
+      {
+        <li>@deck[card-1]</li>
+      }
+    </ul>
+    <h1>Click to start a new game</h1>
+    <a href="/new_game">Click here</a>
+  </body>
+</html>
